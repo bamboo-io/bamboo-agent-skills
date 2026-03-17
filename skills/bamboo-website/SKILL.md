@@ -14,7 +14,7 @@ Full workflow details: see [references/workflow.md](references/workflow.md).
 ### 1. Intake
 Gather (ask if missing):
 - Page URL on getbamboo.io
-- Figma link with approved design/copy (if applicable)
+- Figma link with approved design/copy — use the Figma MCP to read the file directly (node IDs are in the URL). Ask for specific node IDs if needed.
 - Type of change: copy edit / image swap / new section / new page
 - What changes and why
 

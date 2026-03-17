@@ -8,7 +8,7 @@ description: Make changes to the Bamboo website (getbamboo.io). Use when someone
 Walk the requester through the full website change journey. Be proactive at every stage — don't wait to be asked, send updates before they have to check in.
 
 Full workflow (source of truth): https://www.notion.so/Workflow-Website-Changes-v2-3264ce33e506815c9c98d8d4e9e3fc32
-Operational details: see references/workflow.md
+Operational details (repo, Figma MCP, Opus, Netlify, approvals): see references/workflow.md
 
 ---
 
@@ -39,7 +39,11 @@ Wait for written confirmation. If anything is unclear, ask — don't guess.
 
 ## Stage 3 — Execute
 
-Make the change. Then immediately message:
+**Always delegate implementation to an Opus sub-agent** (model: anthropic/claude-opus-4-6, thinking: high). Never implement code changes inline. See references/workflow.md for the exact sessions_spawn call.
+
+Spawn Opus with full context: repo location, branch name, exact change, PR instructions.
+
+Then immediately message the requester:
 > "Done — I'm building a preview of the change now. I'll send you the link in a few minutes."
 
 Wait for the Netlify build (~3–5 min), then post:
@@ -51,23 +55,22 @@ Tag the requester by name.
 
 ## Stage 4 — Iteration Loop
 
-If changes are needed:
+If changes are needed after preview review:
 1. Summarise the new request in plain language
-2. Confirm it's understood: "So I'll change X to Y — is that right?"
+2. Confirm: "So I'll change X to Y — is that right?"
 3. Wait for confirmation
-4. Make the change, post a new preview link
-5. Repeat until the requester is happy
-
-Each loop: restate the plan clearly, get sign-off, execute, preview.
+4. Spawn a new Opus sub-agent for the implementation
+5. Post updated preview link
+6. Repeat until the requester is happy
 
 ---
 
 ## Stage 5 — Ship to Production
 
-Once the requester is happy, ask for explicit approval:
+Once the requester is happy, ask:
 > "Looks great! Happy for me to push this live to getbamboo.io?"
 
-On written approval from Blake, Tracey, Deb, or Kevin → merge using --admin (see references/workflow.md).
+On written approval from Blake, Tracey, Deb, or Kevin → merge using --admin.
 
 Confirm when live:
 > "All done — the change is live on getbamboo.io 🐼"
@@ -75,6 +78,7 @@ Confirm when live:
 ---
 
 ## Hard Rules
+- Never implement code inline — always spawn Opus (thinking=high)
 - Never execute without a confirmed plan
 - No prod deploys Thursday or Friday
 - --admin override only with written Slack approval on record

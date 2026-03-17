@@ -1,46 +1,81 @@
 ---
 name: bamboo-website
-description: Make changes to the Bamboo website (getbamboo.io). Use when someone asks to update, change, edit, fix, or add something to the website — including copy/text changes, image swaps, new sections, or new pages. Triggers include "update the website", "change the website", "website change", "edit the site", "fix the website copy", "add a section to the site", "update the homepage", or any request referencing getbamboo.io content.
+description: Make changes to the Bamboo website (getbamboo.io). Use when someone asks to update, change, edit, fix, or add something to the website — copy edits, image swaps, new sections, new pages. Triggers: "update the website", "change the website", "website change", "edit the site", "fix the copy", "add a section", "update the homepage", or any request about getbamboo.io content.
 ---
 
 # bamboo-website
 
-Handles the full website change workflow: intake → plan → execute → preview → iterate → ship.
+Walk the requester through the full website change journey. Be proactive at every stage — don't wait to be asked, send updates before they have to check in.
 
-Full workflow details: see [references/workflow.md](references/workflow.md).
+Full workflow (source of truth): https://www.notion.so/Workflow-Website-Changes-v2-3264ce33e506815c9c98d8d4e9e3fc32
+Operational details: see references/workflow.md
 
-## Core Steps
+---
 
-### 1. Intake
-Gather (ask if missing):
-- Page URL on getbamboo.io
-- Figma link with approved design/copy — use the Figma MCP to read the file directly (node IDs are in the URL). Ask for specific node IDs if needed.
-- Type of change: copy edit / image swap / new section / new page
-- What changes and why
+## Stage 1 — Intake
 
-### 2. Plan (always before touching code)
-- Identify what files need changing and what will visually change on the site
-- Write the plan in **plain, non-technical language** — no mention of branches, PRs, commits, or repos
-- Post plan in Slack and **wait for written confirmation** before proceeding
-- If anything is unclear or missing (e.g. no Figma link, ambiguous copy), ask before planning
+Acknowledge the request warmly. Check what you have:
 
-### 3. Execute
-- Make the change in the repo (see references/workflow.md for branch/repo details)
-- Post in Slack: "Change is done — building the preview now, I'll send the link shortly"
+**Need all of these — ask for anything missing:**
+- Page URL (e.g. getbamboo.io/features)
+- Figma link with the approved design (ask for specific node IDs if the link is broad)
+- Type of change: text update / image swap / new section / new page
+- What's changing and why
 
-### 4. Preview & Iterate
-- Post the Netlify preview link in Slack once the build completes (~3–5 min)
-- Tag the requester: "Here's the preview — let me know what you think"
-- If changes needed: re-confirm the updated plan in plain language → confirm → make changes → new preview
-- Repeat until requester is happy
+If a Figma link is provided, read it immediately via the Figma MCP (see references/workflow.md). Extract the exact copy, layout, and intent before planning.
 
-### 5. Merge to Production
-- Wait for written Slack approval from Blake, Tracey, Deb, or Kevin
-- Merge using --admin override (bamboo-io/bamboo-web only)
-- Confirm in Slack: "Done — the change is live on getbamboo.io 🐼"
+---
 
-## Key Rules
-- **Plan first, always** — never execute without confirmed plan
-- **Plain language** — Tracey, Deb, Blake are non-technical; describe changes as what they'll see, not what the code does
-- **No prod deploys Thu/Fri**
-- **Admin override** only with written Slack approval on record
+## Stage 2 — Plan (confirm before touching anything)
+
+Write the plan in plain language — describe what will visually change on the website. No code terms, no jargon.
+
+**Say something like:**
+> "Here's what I'll do: on the Features page, I'll change the heading from 'X' to 'Y'. That's the only change. Does that sound right?"
+
+Wait for written confirmation. If anything is unclear, ask — don't guess.
+
+---
+
+## Stage 3 — Execute
+
+Make the change. Then immediately message:
+> "Done — I'm building a preview of the change now. I'll send you the link in a few minutes."
+
+Wait for the Netlify build (~3–5 min), then post:
+> "Here's your preview: [link] — head to the [page name] page to see the change. Let me know what you think!"
+
+Tag the requester by name.
+
+---
+
+## Stage 4 — Iteration Loop
+
+If changes are needed:
+1. Summarise the new request in plain language
+2. Confirm it's understood: "So I'll change X to Y — is that right?"
+3. Wait for confirmation
+4. Make the change, post a new preview link
+5. Repeat until the requester is happy
+
+Each loop: restate the plan clearly, get sign-off, execute, preview.
+
+---
+
+## Stage 5 — Ship to Production
+
+Once the requester is happy, ask for explicit approval:
+> "Looks great! Happy for me to push this live to getbamboo.io?"
+
+On written approval from Blake, Tracey, Deb, or Kevin → merge using --admin (see references/workflow.md).
+
+Confirm when live:
+> "All done — the change is live on getbamboo.io 🐼"
+
+---
+
+## Hard Rules
+- Never execute without a confirmed plan
+- No prod deploys Thursday or Friday
+- --admin override only with written Slack approval on record
+- Plain language always with non-technical users (Blake, Tracey, Deb)

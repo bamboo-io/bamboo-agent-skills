@@ -39,11 +39,10 @@ When a refresh is needed:
 1. Script runs `aws sso login --profile bamboo.production --no-browser`
 2. Extracts the device verification URL from stdout
 3. Opens it in the default browser (`open <url>`)
-4. Sends a Slack DM to Kevin (U07BC9AB82V) with the URL as backup
-5. Waits 20 seconds for browser confirmation
-6. Verifies all profiles with `aws sts get-caller-identity`
+4. Waits 20 seconds for browser confirmation
+5. Verifies all profiles with `aws sts get-caller-identity`
 
-**Kevin must approve the device auth** in the browser (or via the Slack link). The script cannot complete the flow autonomously.
+**This flow can be completed autonomously.** Use the OpenClaw browser tool to open the verification URL, then click through the AWS device authorization page (Allow/Confirm) to complete the OAuth flow without human intervention.
 
 ## Logs
 
